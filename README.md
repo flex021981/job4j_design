@@ -2,6 +2,7 @@
 [![codecov](https://codecov.io/gh/flex021981/job4j_design/branch/master/graph/badge.svg?token=6PAVQXK2K5)](https://codecov.io/gh/flex021981/job4j_design)
 
 # job4j_design
+ 2. Уровень - Джуниор
 
 Блок 1. Структуры данных и алгоритмы.
 
