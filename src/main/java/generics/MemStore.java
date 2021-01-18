@@ -25,7 +25,7 @@ public final class MemStore<T extends Base> implements Store<T> {
     public boolean delete(String id) {
         T rsl = findById(id);
         if (rsl != null) {
-            mem.remove(findIndex(id) - 1);
+            mem.remove(findIndex(id));
             return true;
         }
         return false;
@@ -44,10 +44,10 @@ public final class MemStore<T extends Base> implements Store<T> {
     private int findIndex(String id) {
         int index = 0;
         for (T element : mem) {
-            index++;
             if (element.getId().equals(id)) {
                 return index;
             }
+            index++;
         }
         return -1;
     }
