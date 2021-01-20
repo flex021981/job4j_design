@@ -2,6 +2,8 @@ package collection;
 
 import org.junit.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -30,5 +32,13 @@ public class SimpleStackTest {
         stack.push(2);
         stack.pop();
         assertThat(stack.pop(), is(1));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void whenEmptyStack() {
+        SimpleStack<Integer> stack = new SimpleStack<>();
+        System.out.println(stack.isEmpty());
+        assertTrue(stack.isEmpty());
+        stack.pop();
     }
 }

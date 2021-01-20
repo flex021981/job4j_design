@@ -31,6 +31,7 @@ public class ForwardLinkedTest {
     @Test(expected = NoSuchElementException.class)
     public void whenDeleteEmptyLinked() {
         ForwardLinked<Integer> linked = new ForwardLinked<>();
+        assertTrue(linked.isEmpty());
         linked.deleteFirst();
     }
 
