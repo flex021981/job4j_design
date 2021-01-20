@@ -66,9 +66,8 @@ public class ForwardLinked<T> implements Iterable {
             }
             prev.next = null;
             return tail.value;
-        } else {
-            throw new NoSuchElementException();
         }
+        throw new NoSuchElementException();
     }
 
     private static class Node<T> {
