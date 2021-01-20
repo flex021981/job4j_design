@@ -11,12 +11,12 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class SimpleLinkedListTest {
-    SimpleLinkedList<Integer> subj;
-    Iterator<Integer> it;
+    private SimpleLinkedList<Integer> subj;
+    private Iterator<Integer> it;
 
     @Before
     public void setUp() throws Exception {
-        subj = new SimpleLinkedList<>();
+         subj = new SimpleLinkedList<>();
     }
 
     @Test

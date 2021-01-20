@@ -64,9 +64,9 @@ public class SimpleLinkedList<E> implements Iterable<E> {
     }
 
     private static class Node<E> {
-        E element;
-        Node<E> next;
-        Node<E> prev;
+        private E element;
+        private Node<E> next;
+        private Node<E> prev;
 
         public Node(Node<E> prev, E element, Node<E> next) {
             this.prev = prev;

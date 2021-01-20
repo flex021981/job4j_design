@@ -14,7 +14,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
     //добавляет указанный элемент (model) в первую свободную ячейку;
     public void add(T model) {
-        modCount ++;
+        modCount++;
         if (index >= size) {
             size++;
             container = Arrays.copyOf(container, size);
@@ -32,7 +32,7 @@ public class SimpleArray<T> implements Iterable<T> {
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             private int point = 0;
-            int expectedModCount = modCount;
+            private int expectedModCount = modCount;
 
             @Override
             public boolean hasNext() {
