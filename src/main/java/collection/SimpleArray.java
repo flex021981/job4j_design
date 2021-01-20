@@ -5,7 +5,7 @@ import java.util.*;
 public class SimpleArray<T> implements Iterable<T> {
     private Object[] container;
     private int index = 0;
-    private int size = 1;
+    private int size = 10;
     private int modCount = 0;
 
     public SimpleArray() {
@@ -17,7 +17,7 @@ public class SimpleArray<T> implements Iterable<T> {
         modCount++;
         if (index >= size) {
             size++;
-            container = Arrays.copyOf(container, size);
+            container = Arrays.copyOf(container, 2 * size);
         }
         container[index++] = model;
     }
