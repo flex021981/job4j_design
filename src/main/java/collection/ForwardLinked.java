@@ -19,7 +19,7 @@ public class ForwardLinked<T> implements Iterable {
         tail.next = node;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return head == null;
     }
 
