@@ -44,6 +44,7 @@ public class SimpleLinkedListTest {
         assertFalse(subj.iterator().hasNext());
         subj.iterator().next();
     }
+
     @Test(expected = ConcurrentModificationException.class)
     public void whenGetModifcationError() {
         int size = 10;
