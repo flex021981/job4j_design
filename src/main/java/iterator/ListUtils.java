@@ -1,5 +1,6 @@
 package iterator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
@@ -30,12 +31,6 @@ public class ListUtils {
             }
             it.next();
         }
-
-       /* if (index > 0) {
-            addBefore(list, index - 1, value);
-        } else {
-            addBefore(list, index, value);
-        }*/
     }
 
     public static <T> List<T> removeIf(List<T> list, Predicate<T> filter) {
@@ -59,13 +54,10 @@ public class ListUtils {
     }
 
     public static <T> List<T> removeAll(List<T> list, List<T> elements) {
-        ListIterator<T> it;
-        for (T e : elements) {
-            it = list.listIterator();
-            while (it.hasNext()) {
-                if (it.next().equals(e)) {
-                    it.remove();
-                }
+        ListIterator<T> it = list.listIterator();
+        while (it.hasNext()) {
+            if (elements.contains(it.next())) {
+                it.remove();
             }
         }
         return list;
