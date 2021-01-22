@@ -1,7 +1,6 @@
 package collection;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 public class ForwardLinked<T> implements Iterable {
@@ -28,17 +27,17 @@ public class ForwardLinked<T> implements Iterable {
         Node<T> prev = null;
         Node<T> current = head;
         Node<T> next = null;
-        if (head == null) {
+        if (head == null || head.next == null) {
             throw new NoSuchElementException();
+        } else {
+            while (current != null) {
+                next = current.next;
+                current.next = prev;
+                prev = current;
+                current = next;
+            }
+            head = prev;
         }
-
-        while (current != null) {
-            next = current.next;
-            current.next = prev;
-            prev = current;
-            current = next;
-        }
-        head = prev;
     }
 
     @Override
