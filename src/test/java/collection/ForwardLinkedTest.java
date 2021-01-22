@@ -78,11 +78,4 @@ public class ForwardLinkedTest {
         assertThat(it.next(), is(2));
         assertThat(it.next(), is(1));
     }
-
-    @Test(expected = NoSuchElementException.class)
-    public void whenRevertEmptyLinked() {
-        ForwardLinked<Integer> linked = new ForwardLinked<>();
-        assertTrue(linked.isEmpty());
-        linked.revert();
-    }
 }
