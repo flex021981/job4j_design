@@ -39,6 +39,11 @@ class User {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(name, children, birthday);
+    }
+
+    @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMMM dd");
         return "User{" +
@@ -80,8 +85,14 @@ public class Users {
                 1,
                 new GregorianCalendar(1990, Calendar.JANUARY, 10)
         );
+        User userNikolayCopy = new User(
+                "Nikolay",
+                1,
+                new GregorianCalendar(1990, Calendar.JANUARY, 10)
+        );
         users.add(userIvan, new Object());
         users.add(userNikolay, new Object());
+        users.add(userNikolayCopy, new Object());
         System.out.println(users);
     }
 }
