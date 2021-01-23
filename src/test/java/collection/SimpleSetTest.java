@@ -13,13 +13,13 @@ public class SimpleSetTest {
     @Test
     public void whenAddThenIterate() {
         SimpleSet<Integer> subj = new SimpleSet<>();
-        subj.add(1);
+        subj.add(null);
         subj.add(2);
         subj.add(3);
         subj.add(3);
         Iterator<Integer> it = subj.iterator();
         assertTrue(it.hasNext());
-        assertThat(1, is(it.next()));
+        assertThat(null, is(it.next()));
         assertTrue(it.hasNext());
         assertThat(2, is(it.next()));
         assertTrue(it.hasNext());

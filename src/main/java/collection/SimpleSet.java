@@ -1,6 +1,7 @@
 package collection;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 public class SimpleSet<E> implements Iterable {
     private final SimpleArray<E> container;
@@ -19,7 +20,7 @@ public class SimpleSet<E> implements Iterable {
         Iterator<E> it = container.iterator();
         boolean rsl = false;
         while (it.hasNext()) {
-            if (element.equals(it.next())) {
+            if (Objects.equals(element, it.next())) {
                 rsl = true;
                 break;
             }
