@@ -12,7 +12,7 @@ class Tree<E> implements SimpleTree<E> {
     }
 
     public boolean isBinary() {
-        boolean rsl = false;
+        boolean rsl = true;
         Queue<Node<E>> data = new LinkedList<>();
         data.offer(this.root);
         while (!data.isEmpty()) {
