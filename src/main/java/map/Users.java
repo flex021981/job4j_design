@@ -28,10 +28,15 @@ final class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         User user = (User) o;
-        return children == user.children && Objects.equals(name, user.name) && Objects.equals(birthday, user.birthday);
+        return children == user.children && Objects.equals(name, user.name)
+                && Objects.equals(birthday, user.birthday);
     }
 
     @Override
@@ -42,11 +47,11 @@ final class User {
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMMM dd");
-        return "User{" +
-                "name='" + name + '\'' +
-                ", children=" + children +
-                ", birthday=" + sdf.format(birthday.getTime()) +
-                '}';
+        return "User{"
+                + "name='" + name + '\''
+                + ", children=" + children
+                + ", birthday=" + sdf.format(birthday.getTime())
+                + '}';
     }
 }
 
@@ -63,9 +68,7 @@ public class Users {
 
     @Override
     public String toString() {
-        return "Users{" +
-                "users=" + users +
-                '}';
+        return "Users{" + "users=" + users + '}';
     }
 
     public static void main(String[] args) {
