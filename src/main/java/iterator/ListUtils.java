@@ -1,6 +1,5 @@
 package iterator;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;

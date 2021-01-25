@@ -3,10 +3,10 @@ package map;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-class User {
-    private String name;
-    private int children;
-    private Calendar birthday;
+final class User {
+    private final String name;
+    private final int children;
+    private final Calendar birthday;
 
     public User(String name, int children, Calendar birthday) {
         this.name = name;
@@ -18,24 +18,20 @@ class User {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getChildren() {
         return children;
-    }
-
-    public void setChildren(int children) {
-        this.children = children;
     }
 
     public Calendar getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Calendar birthday) {
-        this.birthday = birthday;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return children == user.children && Objects.equals(name, user.name) && Objects.equals(birthday, user.birthday);
     }
 
     @Override
@@ -94,6 +90,9 @@ public class Users {
         users.add(userNikolay, new Object());
         users.add(userNikolayCopy, new Object());
         System.out.println(users);
+        System.out.println(userNikolay.hashCode());
+        System.out.println(userNikolayCopy.hashCode());
+        System.out.println(userNikolay.equals(userNikolayCopy));
     }
 }
 
