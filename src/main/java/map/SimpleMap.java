@@ -10,12 +10,13 @@ public class SimpleMap<K, V> implements Iterable<SimpleMap.Node<K, V>> {
     private Node<K, V>[] table = new Node[16];
     private int size;
     private int modCount;
-    private float loadFactor = table.length * 0.75f;
+    private float loadFactor = 0.75f;
+    private float threshold = table.length * loadFactor;
 
     private void hashing() {
         Node<K, V>[] oldTable = table;
         table = new Node[table.length * 2];
-        loadFactor = table.length * 0.75f;
+        threshold = table.length * loadFactor;
         for (Node<K, V> node : oldTable) {
             if (node != null) {
                 table[getBucket(node.hash)] = node;
@@ -27,10 +28,10 @@ public class SimpleMap<K, V> implements Iterable<SimpleMap.Node<K, V>> {
         return (table.length - 1) & hash;
     }
 
-    boolean insert(K key, V value) {
+    public boolean insert(K key, V value) {
         int hash = hash(key);
         int index = getBucket(hash);
-        if (size + 1 > loadFactor) {
+        if (size + 1 > threshold) {
             hashing();
         }
         Node<K, V> newNode = new Node<>(key, value, hash);
@@ -47,13 +48,12 @@ public class SimpleMap<K, V> implements Iterable<SimpleMap.Node<K, V>> {
         return false;
     }
 
-    boolean delete(K key) {
+    public boolean delete(K key) {
         boolean rsl = false;
         int hash = hash(key);
         int index = getBucket(hash);
         Node<K, V> node = table[index];
-        if ((node != null)
-                && ((key == null && node.key == null) || (key != null && key.equals(node.key)))) {
+        if (node != null && Objects.equals(key, node.key)) {
             table[index] = null;
             size--;
             modCount++;
@@ -62,15 +62,13 @@ public class SimpleMap<K, V> implements Iterable<SimpleMap.Node<K, V>> {
         return rsl;
     }
 
-    V get(K key) {
+    public V get(K key) {
         V value = null;
         int hash = hash(key);
         int index = getBucket(hash);
         Node<K, V> node = table[index];
-        if ((node != null)
-                && ((key == null && node.key == null) || (key != null && key.equals(node.key)))) {
+        if (node != null && Objects.equals(key, node.key)) {
             value = node.value;
-
         }
         return value;
     }
@@ -94,9 +92,8 @@ public class SimpleMap<K, V> implements Iterable<SimpleMap.Node<K, V>> {
 
             @Override
             public boolean hasNext() {
-                for (int i = 0; i < table.length; i++) {
+                for (int i = index; i < table.length; i++) {
                     if (table[i] != null) {
-                        index = i;
                         return true;
                     }
                 }
