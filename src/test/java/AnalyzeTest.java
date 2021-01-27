@@ -40,7 +40,7 @@ public class AnalyzeTest {
                 new Analyze.User(2, "Nikolay"),
                 new Analyze.User(3, "Stepan")
         );
-        subj = new Analyze.Info(0, 0, 0);
+        subj = new Analyze.Info(0, 0, 0, 3);
         rsl = analyze.diff(previous, current);
         assertThat(subj, is(rsl));
     }
@@ -53,19 +53,19 @@ public class AnalyzeTest {
                 new Analyze.User(3, "Stepan"),
                 new Analyze.User(4, "Anton")
         );
-        subj = new Analyze.Info(1, 0, 0);
+        subj = new Analyze.Info(1, 0, 0, 3);
         rsl = analyze.diff(previous, current);
-        System.out.println(rsl.toString());
         assertThat(subj, is(rsl));
     }
 
+    @Test
     public void whenReplaceAndDiff() {
         current = Arrays.asList(
                 new Analyze.User(1, "Ivan"),
                 new Analyze.User(2, "Nikolay"),
                 new Analyze.User(3, "StepanNew")
         );
-        subj = new Analyze.Info(0, 1, 0);
+        subj = new Analyze.Info(0, 1, 0, 2);
         rsl = analyze.diff(previous, current);
         assertThat(subj, is(rsl));
     }
@@ -76,7 +76,7 @@ public class AnalyzeTest {
                 new Analyze.User(1, "Ivan"),
                 new Analyze.User(2, "Nikolay")
         );
-        subj = new Analyze.Info(0, 0, 1);
+        subj = new Analyze.Info(0, 0, 1, 2);
         rsl = analyze.diff(previous, current);
         assertThat(subj, is(rsl));
     }

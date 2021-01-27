@@ -1,34 +1,26 @@
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Analyze {
     public Info diff(List<User> previous, List<User> current) {
-        Info rsl = new Info(0, 0, 0);
-        rsl.added = count(current, previous);
-        rsl.deleted = count(previous, current);
+        Info rsl = new Info(0, 0, 0, 0);
+        Map<Integer, User> currentMap = current
+                .stream()
+                .collect(Collectors.toMap(user -> user.id, user -> user));
 
-        for (User userCurrent : current) {
-            for (User userPrevious : previous) {
-                if (userPrevious.id == userCurrent.id
-                        && !Objects.equals(userPrevious.name, userCurrent.name)) {
-                    rsl.changed++;
-                }
-            }
-        }
-        return rsl;
-    }
-
-    private int count(List<User> previous, List<User> current) {
-        int rsl = 0;
-        ListIterator<User> it = previous.listIterator();
+        Iterator<User> it = previous.iterator();
         User user = null;
         while (it.hasNext()) {
             user = it.next();
-            if (!current.contains(user)) {
-                rsl++;
+            if (currentMap.containsKey(user.id) && !currentMap.get(user.id).equals(user)) {
+                rsl.changed++;
+            }
+            if (currentMap.containsKey(user.id) && currentMap.get(user.id).equals(user)) {
+                rsl.old++;
             }
         }
+        rsl.added = current.size() - (rsl.old + rsl.changed);
+        rsl.deleted = previous.size() - (rsl.old + rsl.changed);
         return rsl;
     }
 
@@ -37,11 +29,13 @@ public class Analyze {
         private int changed;    //Сколько изменено пользователей.
         //Изменённым считается объект в котором изменилось имя. а id осталось прежним.
         private int deleted;    //Сколько удалено пользователей.
+        private int old;    //Сколько пользователей без изменений.
 
-        public Info(int added, int changed, int deleted) {
+        public Info(int added, int changed, int deleted, int old) {
             this.added = added;
             this.changed = changed;
             this.deleted = deleted;
+            this.old = old;
         }
 
         @Override
